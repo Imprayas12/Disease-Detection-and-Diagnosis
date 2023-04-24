@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/disease.css">
+    <title>Enter disease details here</title>
+</head>
+<body>
+    <h1>Select all the symptoms that you're feeling</h1>
+    <form action="/diseaseDetails" method="post">
+    <ul>
+        <% for(let disease of diseases) { %>
+          <li class = "disease-checkbox">
+            <label for="<%= disease %>"><%= disease.split("_").map(str => {return str.replace(/\b\w/g, (char) => char.toUpperCase())}).join(" ") %></label>
+            <input type="checkbox" name = "<%= disease %>">
+        </li>
+        <% } %>
+    </ul>
+        <button>Submit</button>
+    </form>
+    <script type = "text/javascript" src="/javascript/disease.js"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+* {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+body {
+    background: url('https://img.freepik.com/free-vector/dark-gradient-background-with-copy-space_53876-99548.jpg?w=1060&t=st=1682307528~exp=1682308128~hmac=10cbc257533eef94de4ddf88779dfe57d36e1627557fc69183f1d55893eb3720');
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
+    background-attachment: fixed;
+    color: white;
+}
