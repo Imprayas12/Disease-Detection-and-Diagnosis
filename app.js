@@ -3,11 +3,13 @@ const path = require('path')
 const app = express()
 const PORT = 8880
 const fs = require('fs')
+const session = require('express-session')
 const { PythonShell } = require('python-shell')
 app.use(express.static(path.join(__dirname, 'views')))
 app.use(express.static(path.join(__dirname, 'public')))
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true }))
+
 
 const diseases = [
     "itching",
@@ -175,7 +177,8 @@ app.post('/diseaseDetails', (req, res) => {
 app.get('/result',async (req, res) => {
     const jsonData = fs.readFileSync('result.json', 'utf8');
     const data = JSON.parse(jsonData);
-    res.send(data)
+    const disease = data.disease;
+    res.render('result',{disease});
 })
 
 app.listen(PORT, (req, res) => {
