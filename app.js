@@ -146,6 +146,50 @@ const diseases = [
     "yellow_crust_ooze"
 ]
 
+const treatment = {
+    "Fungal infection": ["Antifungal medication", "Keeping the affected area dry and clean"],
+    "Hepatitis C": ["Antiviral medication", "Liver transplant in severe cases"],
+    "Hepatitis E": ["Rest and hydration", "Avoiding alcohol and fatty foods"],
+    "Alcoholic hepatitis": ["Stopping alcohol consumption", "Medication to reduce liver inflammation"],
+    "Tuberculosis": ["Antibiotics for several months", "Rest and good nutrition"],
+    "Common Cold": ["Rest and hydration", "Over-the-counter cold medication"],
+    "Pneumonia": ["Antibiotics", "Rest and good nutrition"],
+    "Dimorphic hemmorhoids(piles)": ["Increased fiber and fluids in diet", "Topical creams or suppositories"],
+    "Heart attack": ["Aspirin to prevent blood clots", "Nitroglycerin to improve blood flow to the heart"],
+    "Varicose veins": ["Compression stockings", "Elevating the legs when possible"],
+    "Hypothyroidism": ["Levothyroxine to replace missing thyroid hormone", "Regular thyroid function tests"],
+    "Hyperthyroidism": ["Antithyroid medication", "Radioactive iodine therapy"],
+    "Hypoglycemia": ["Eating small, frequent meals", "Monitoring blood sugar levels"],
+    "Osteoarthristis": ["Pain relief medication", "Physical therapy"],
+    "Arthritis": ["Pain relief medication", "Exercise and physical therapy"],
+    "(vertigo) Paroymsal  Positional Vertigo": ["Epley maneuver to reposition loose particles in the ear", "Medication for nausea and dizziness"],
+    "Acne": ["Topical creams or gels", "Oral antibiotics in severe cases"],
+    "Urinary tract infection": ["Antibiotics", "Drinking plenty of fluids"],
+    "Psoriasis": ["Topical creams or ointments", "Light therapy"],
+    "Hepatitis D": ["Vaccination for hepatitis B to prevent coinfection", "Antiviral medication"],
+    "Hepatitis B": ["Antiviral medication", "Liver transplant in severe cases"],
+    "Allergy": ["Antihistamines", "Avoiding allergens"],
+    "Hepatitis A": ["Rest and hydration", "Avoiding alcohol and fatty foods"],
+    "GERD": ["Antacids or acid-reducing medications", "Avoiding trigger foods"],
+    "Chronic cholestasis": ["Ursodeoxycholic acid to improve bile flow", "Monitoring liver function"],
+    "Drug Reaction": ["Discontinuing the offending medication", "Treating symptoms such as rash or swelling"],
+    "Peptic ulcer diseae": ["Antibiotics to treat H. pylori infection", "Acid-reducing medication"],
+    "AIDS": ["Antiretroviral medication", "Preventing opportunistic infections"],
+    "Diabetes": ["Blood sugar monitoring", "Insulin or oral medication"],
+    "Gastroenteritis": ["Rest and hydration", "Avoiding solid foods until symptoms improve"],
+    "Bronchial Asthma": ["Bronchodilators to open airways", "Steroid medication to reduce inflammation"],
+    "Hypertension": ["Lifestyle changes such as diet and exercise", "Antihypertensive medication"],
+    "Migraine": ["Pain relief medication", "Avoiding triggers such as stress or certain foods"],
+    "Cervical spondylosis": ["Physical therapy to improve neck strength and range of motion", "Pain relief medication"],
+    "Paralysis (brain hemorrhage)": ["Rehabilitation therapy such as physical and occupational therapy", "Speech therapy in case of speech impairment"],
+    "Jaundice": ["Rest and hydration", "Treating underlying conditions such as viral hepatitis"],
+    "Malaria": ["Antimalarial medication", "Rest and hydration"],
+    "Chicken pox": ["Antiviral medication in severe cases", "Calamine lotion to relieve itching"],
+    "Dengue": ["Rest and hydration", "Pain relief medication"],
+    "Typhoid": ["Antibiotics", "Rest and hydration"],
+    "Impetigo": ["Antibacterial creams or ointments", "Oral antibiotics in severe cases"]
+};
+
 app.get('/', (req, res) => {
     res.render('index');
 })
@@ -156,6 +200,10 @@ app.get('/diseaseDetails', (req, res) => {
 
 app.post('/diseaseDetails', (req, res) => {
     const symptoms = req.body;
+    if(!symptoms) {
+        res.redirect('/diseaseDetails')
+        return;
+    }
     let diseaseObj = {};
     for (let dis of diseases) {
         if (symptoms[dis]) {
@@ -165,22 +213,23 @@ app.post('/diseaseDetails', (req, res) => {
     }
     let options = {
         scriptPath: "",
-        mode:"json",
-        args:[JSON.stringify(diseaseObj)]
+        mode: "json",
+        args: [JSON.stringify(diseaseObj)]
     }
-    PythonShell.run("run.py",options,(err, res) => {
-        if(err) console.log(err);
+    PythonShell.run("run.py", options, (err, res) => {
+        if (err) console.log(err);
     })
     res.redirect('/result');
 })
 
-app.get('/result',async (req, res) => {
+app.get('/result', async (req, res) => {
     const jsonData = fs.readFileSync('result.json', 'utf8');
     const data = JSON.parse(jsonData);
     const disease = data.disease;
-    res.render('result',{disease});
+    const treatments = treatment[disease]
+    res.render('result', { disease, treatments });
 })
 
-app.listen(PORT, (req, res) => {
+app.listen(PORT, () => {
     console.log(`server running on port ${PORT}`)
 })

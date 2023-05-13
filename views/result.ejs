@@ -4,11 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/result.css">
     <title>Result</title>
 </head>
 <body>
     <h1>You are probably sufferring from <%= disease %></h1>
     <h2>Here are some possible treatment methods for your disease.</h2>
-    
+    <% for(let treatment of treatments) { %>
+        <ul>
+            <li>
+                <%= treatment %>
+            </li>
+        </ul>
+    <% } %>
+    <h1>Diagnose Another Disease?</h1>
+    <button><a href="/">Click Here</a></button>
 </body>
 </html>

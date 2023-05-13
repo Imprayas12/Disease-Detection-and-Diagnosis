@@ -1,11 +1,66 @@
-* {
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-}
-
 body {
-    background: url('https://img.freepik.com/free-vector/dark-gradient-background-with-copy-space_53876-99548.jpg?w=1060&t=st=1682307528~exp=1682308128~hmac=10cbc257533eef94de4ddf88779dfe57d36e1627557fc69183f1d55893eb3720');
-    background-repeat: no-repeat;
-    background-size: 100vw 100vh;
-    background-attachment: fixed;
-    color: white;
-}
+    background: linear-gradient(to bottom, #1f2937, #111827);
+    font-family: Arial, sans-serif;
+    color: #fff;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin: 2rem 0;
+  }
+  
+  ul {
+    list-style-type: none;
+    width: 60%;
+    margin: auto;
+  }
+  
+  li {
+    color: #111827 !important;
+    font-weight: 600;
+    background-color: #93939b;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    height: 3rem;
+    margin: 1rem;
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  label {
+    font-size: 1.5rem;
+  }
+  
+  input[type='checkbox'] {
+    margin: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    transition: border-color 0.2s ease;
+  }
+  
+  input[type='checkbox']:checked {
+    border-color: #007bff;
+  }
+  
+  button {
+    margin: 2rem auto;
+    display: block;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #0062cc;
+  }
+  
