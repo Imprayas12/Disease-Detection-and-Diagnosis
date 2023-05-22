@@ -223,11 +223,13 @@ app.post('/diseaseDetails', (req, res) => {
 })
 
 app.get('/result', async (req, res) => {
-    const jsonData = fs.readFileSync('result.json', 'utf8');
-    const data = JSON.parse(jsonData);
-    const disease = data.disease;
-    const treatments = treatment[disease]
-    res.render('result', { disease, treatments });
+    setTimeout(() => {
+      const jsonData = fs.readFileSync('result.json', 'utf8');
+      const data = JSON.parse(jsonData);
+      const disease = data.disease;
+      const treatments = treatment[disease];
+      res.render('result', { disease, treatments });
+    }, 4000);
 })
 
 app.listen(PORT, () => {
