@@ -1,3 +1,4 @@
+pip install pandas
 import sys
 import json
 import pandas as pd
