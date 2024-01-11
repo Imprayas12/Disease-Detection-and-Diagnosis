@@ -218,8 +218,9 @@ app.post('/diseaseDetails', (req, res) => {
     }
     PythonShell.run("run.py", options, (err, res) => {
         if (err) console.log(err);
+    }).then(() => {
+        res.redirect('/result');
     })
-    res.redirect('/result');
 })
 
 app.get('/result', async (req, res) => {
